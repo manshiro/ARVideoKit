@@ -57,17 +57,25 @@ class LivePhotoGenerator {
                         logAR.remove(from: keyFrame)
                         logAR.remove(from: liveFrames)
                         if let livePhoto = photo {
-                            let finalPhoto = PHLivePhotoPlus(photo: livePhoto)
-                            finalPhoto.keyPhotoPath = keyLiveFrame
-                            finalPhoto.pairedVideoPath = keyLiveFrames
-                            finished?(true, finalPhoto, finalPhoto.pairedVideoPath, finalPhoto.keyPhotoPath)
-                            return
-                        } else {
-                            let finalPhoto = PHLivePhotoPlus(photo: photo!)
-                            finalPhoto.keyPhotoPath = keyLiveFrame
-                            finalPhoto.pairedVideoPath = keyLiveFrames
-                            finished?(false, finalPhoto, finalPhoto.pairedVideoPath, finalPhoto.keyPhotoPath)
-                            return
+                            if let finalPhoto = PHLivePhotoPlus(coder: NSCoder())
+                            {
+                                finalPhoto.livePhoto = livePhoto
+                                finalPhoto.keyPhotoPath = keyLiveFrame
+                                finalPhoto.pairedVideoPath = keyLiveFrames
+                                finished?(true, finalPhoto, finalPhoto.pairedVideoPath, finalPhoto.keyPhotoPath)
+                                return
+                            }
+                        }
+                        else
+                        {
+                            if let finalPhoto = PHLivePhotoPlus(coder: NSCoder())
+                            {
+                                finalPhoto.livePhoto = photo!
+                                finalPhoto.keyPhotoPath = keyLiveFrame
+                                finalPhoto.pairedVideoPath = keyLiveFrames
+                                finished?(false, finalPhoto, finalPhoto.pairedVideoPath, finalPhoto.keyPhotoPath)
+                                return
+                            }
                         }
                     }
                 }

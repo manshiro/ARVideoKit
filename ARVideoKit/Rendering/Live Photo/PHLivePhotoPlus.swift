@@ -24,16 +24,16 @@ import Photos
     
     /// A `PHLivePhoto` object that returns the Live Photo content from `PHLivePhotoPlus`.
     @objc public var livePhoto: PHLivePhoto?
-    
-    @objc public override init() {
-        super.init()
-    }
-    
-    @objc public init(photo: PHLivePhoto) {
-        super.init()
-        livePhoto = photo
-    }
-    
+//    
+//    @objc public override init() {
+//        super.init()
+//    }
+//    
+//    @objc public init(photo: PHLivePhoto) {
+//        super.init()
+//        livePhoto = photo
+//    }
+//    
     @objc required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
